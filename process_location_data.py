@@ -7,7 +7,8 @@ def process_location_data(file_name):
     file = open(file_name, "r")
     for line in file:
         lat_and_long_dict = {}
-        city_names = set(re.findall(r',([a-zA-Z ]+)', line))
+        city_names_line = re.split('\d+', line)[1]
+        city_names = set(re.findall(r'[a-zA-Z -\']+', city_names_line))
         lat_and_long = re.findall(r'[0-9]+\.[0-9]*', line)
         try:
             lat_and_long_dict["lat"] = lat_and_long[0]
